@@ -1,0 +1,1 @@
+void printErrorMessage(const char* message);
