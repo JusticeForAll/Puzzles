@@ -8,16 +8,16 @@
 
 typedef enum boolean
 {
-	FALSE,
-	TRUE
+    FALSE,
+    TRUE
 } BOOL;
 
 typedef struct 
 {
-	int threadNumber;
-	int memoryBlockAddress;
-	int time;
-	int readWrite;
+    int threadNumber;
+    int memoryBlockAddress;
+    int time;
+    int readWrite;
 } memoryAccessEntry;
 
 extern memoryAccessEntry makeMemoryAccessEntry(const int threadNum, const int memBlockAddress, const int zeit, const int rw);
