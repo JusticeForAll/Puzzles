@@ -102,7 +102,7 @@ void mergeMemoryAccessEntries(memoryAccessEntry* arr, const int leftPosition, co
     }
 }
 
-void findConflicts(memoryAccessEntry* arr, int size)
+void findConflicts(memoryAccessEntry* arr, const int size)
 {
     mergeSortMemoryAccessEntries(arr, 0, size-1, MEMORY_BLOCK_ADDRESS);
     
@@ -136,7 +136,7 @@ void findConflicts(memoryAccessEntry* arr, int size)
             int j = i;
             while(j > 0 && arr[j].memoryBlockAddress == arr[i].memoryBlockAddress)
             {
-                if(isConflict(arr[j], arr[i]) && arr[j].threadNumber != arr[i].threadNumber)
+                if(isConflict(arr[j], arr[i]))
                     printf("Conflict found: threads %d and %d.\n", arr[j].threadNumber, arr[i].threadNumber);
                 --j;
             }
@@ -144,12 +144,14 @@ void findConflicts(memoryAccessEntry* arr, int size)
     }
 }
 
-BOOL isConflict(memoryAccessEntry arr1, memoryAccessEntry arr2)
+BOOL isConflict(const memoryAccessEntry arr1, const memoryAccessEntry arr2)
 {
-    return (abs(arr1.time - arr2.time) <= THREAD_ACCESS_TIME_THRESHOLD) && (arr1.readWrite == WRITE || arr2.readWrite == WRITE);
+    return ((abs(arr1.time - arr2.time) <= THREAD_ACCESS_TIME_THRESHOLD) && 
+            (arr1.readWrite == WRITE || arr2.readWrite == WRITE) &&
+            (arr1.threadNumber != arr2.threadNumber));
 }
 
-void printMemoryAccessEntry(memoryAccessEntry entry)
+void printMemoryAccessEntry(const memoryAccessEntry entry)
 {
     printf("***Memory Access Entry:\n");
     printf("   Thread Number: %d\n", entry.threadNumber);
