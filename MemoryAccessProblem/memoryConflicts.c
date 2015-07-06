@@ -16,12 +16,12 @@ int main()
     entries[6] = makeMemoryAccessEntry(7, 835, 2, READ);
     entries[7] = makeMemoryAccessEntry(8, 432, 1, READ);
     
-    for(i = 0; i < SIZE; i++)
-        printMemoryAccessEntry(entries[i]);
-    printf("Sorting....\n\n");
+    //for(i = 0; i < SIZE; i++)
+        //printMemoryAccessEntry(entries[i]);
+    //printf("Sorting....\n\n");
     findConflicts(entries, sizeof(entries)/sizeof(entries[0]));
     
-    for(i = 0; i < SIZE; i++)
-        printMemoryAccessEntry(entries[i]);
+    //for(i = 0; i < SIZE; i++)
+        //printMemoryAccessEntry(entries[i]);
     return 0;
 }

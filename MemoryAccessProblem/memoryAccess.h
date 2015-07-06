@@ -6,6 +6,8 @@
 #define TIME 4
 #define READ_WRITE 5
 
+#define THREAD_ACCESS_TIME_THRESHOLD 5
+
 typedef enum boolean
 {
     FALSE,
@@ -29,3 +31,4 @@ extern void mergeMemoryAccessEntries(memoryAccessEntry* arr, const int leftPosti
 extern void printMemoryAccessEntry(memoryAccessEntry entry);
 
 extern void findConflicts(memoryAccessEntry* arr, int size);
+extern BOOL isConflict(memoryAccessEntry arr1, memoryAccessEntry arr2);

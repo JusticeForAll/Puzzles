@@ -127,6 +127,26 @@ void findConflicts(memoryAccessEntry* arr, int size)
             leftPosition = rightPosition++;
         }
     }
+    
+    int i;
+    for(i = 1; i < size; ++i)
+    {
+        if(arr[i-1].memoryBlockAddress == arr[i].memoryBlockAddress)
+        {
+            int j = i;
+            while(j > 0 && arr[j].memoryBlockAddress == arr[i].memoryBlockAddress)
+            {
+                if(isConflict(arr[j], arr[i]) && arr[j].threadNumber != arr[i].threadNumber)
+                    printf("Conflict found: threads %d and %d.\n", arr[j].threadNumber, arr[i].threadNumber);
+                --j;
+            }
+        }
+    }
+}
+
+BOOL isConflict(memoryAccessEntry arr1, memoryAccessEntry arr2)
+{
+    return (abs(arr1.time - arr2.time) <= THREAD_ACCESS_TIME_THRESHOLD) && (arr1.readWrite == WRITE || arr2.readWrite == WRITE);
 }
 
 void printMemoryAccessEntry(memoryAccessEntry entry)
